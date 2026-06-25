@@ -70,7 +70,7 @@ languageDropdown.addEventListener("change", e => {
     document.querySelectorAll("[data-translation-id], [data-translation-hide]").forEach(el => {
         if (!el.dataset.translationHide) {
             if (el.dataset.translationTarget) el.setAttribute(el.dataset.translationTarget, locale[el.dataset.translationId])
-                else el.innerHTML = locale[el.dataset.translationId];
+            else el.innerHTML = locale[el.dataset.translationId];
         } else {
             let languages = el.dataset.translationHide.split(", ");
             if (languages.includes(language)) el.remove();
@@ -97,7 +97,7 @@ countryDropdown.addEventListener("change", e => {
 document.querySelectorAll("[data-translation-id], [data-translation-hide]").forEach(el => {
     if (!el.dataset.translationHide) {
         if (el.dataset.translationTarget) el.setAttribute(el.dataset.translationTarget, locale[el.dataset.translationId])
-            else el.innerHTML = locale[el.dataset.translationId];
+        else el.innerHTML = locale[el.dataset.translationId];
     } else {
         let languages = el.dataset.translationHide.split(", ");
         if (languages.includes(language)) el.remove();
@@ -202,9 +202,9 @@ window.zappr.videojs = videojs;
 
 player.on("fullscreenchange", () => {
     if (document.fullscreenElement) {
-        screen.orientation.lock("landscape-primary").catch(() => {});
+        screen.orientation.lock("landscape-primary").catch(() => { });
     } else {
-        screen.orientation.unlock().catch(() => {});
+        screen.orientation.unlock().catch(() => { });
     };
 });
 player.on("loadeddata", () => {
@@ -256,7 +256,7 @@ if (window.matchMedia("(max-width: 100vh)").matches) {
         } else {
             skippingClickTimer = setTimeout(() => {
                 skippingClickCount = 0;
-                
+
                 if (skippingWasDoubleClicking) {
                     document.querySelector(".video-js").dataset.skippingDeactivating = "true";
                     setTimeout(() => document.querySelector(".video-js").dataset.skipping = "", 1000);
@@ -271,7 +271,7 @@ if (window.matchMedia("(max-width: 100vh)").matches) {
 document.head.appendChild(document.querySelector("#new-player-fix"));
 
 const overlays = document.querySelector("#overlays"),
-      nightAdultChannelsStyle = document.querySelector("#night-adult-channels");
+    nightAdultChannelsStyle = document.querySelector("#night-adult-channels");
 
 window.zappr.closeModal = () => {
     if (document.querySelector(".modal") != null) {
@@ -299,17 +299,16 @@ const createErrorModal = async ({ title, error, info, params, type, additional =
             <div class="code" onclick="copyInfo()">${info}</div>    
             ` : ""}
             ${!additional && (localStorage.getItem("selected-base-list") === "default" || localStorage.getItem("selected-base-list") === "favorites") ? `<p id="report-error">${type === "dash" && isiOS
-                ? locale["unreportableErrorDASHiOS"]
-                : params.lcn >= 1000
-                    ? locale["unreportableErrorFAST"]
-                    : locale["reportError"]}</p>
+            ? locale["unreportableErrorDASHiOS"]
+            : params.lcn >= 1000
+                ? locale["unreportableErrorFAST"]
+                : locale["reportError"]}</p>
             ${!(type === "dash" && isiOS) && params.lcn < 1000 ? `<div class="modal-buttons">
                 <a class="button primary" href="https://github.com/ZapprTV/channels/issues/new?${urlParams}" target="_blank">
                     ${locale["reportViaGithub"]}
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h14v-7h2v7q0 .825-.587 1.413T19 21zm4.7-5.3l-1.4-1.4L17.6 5H14V3h7v7h-2V6.4z"></path></svg>
                 </a>
-                <a class="button secondary" href="mailto:zappr@francescoro.si?subject=${params.title}&body=${
-                    encodeURIComponent(`${locale["errorTechnicalInfo"]}: ${params.info}
+                <a class="button secondary" href="mailto:zappr@francescoro.si?subject=${params.title}&body=${encodeURIComponent(`${locale["errorTechnicalInfo"]}: ${params.info}
 
 ${locale["errorEmailFooter"]}
 
@@ -414,7 +413,7 @@ if (new URLSearchParams(location.search).get("androidtv") != null) {
             } else if (document.querySelector("#channels-column").style.display === "none") {
                 if (document.querySelector(".channel.watching") != null) {
                     if (document.querySelector(".channel.watching .channel-program")) document.querySelector(".channel.watching .channel-program").focus()
-                        else document.querySelector(".channel.watching").focus();
+                    else document.querySelector(".channel.watching").focus();
                 };
                 document.querySelector("#channels-column").style.display = "block";
                 document.querySelector("#overlays").classList.remove("full-width");
@@ -528,10 +527,9 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
                     text: `Questo è un canale di tipo HTTP. Clicca su "Attiva" qui sotto e segui le istruzioni per attivare la visione di questo tipo di canale.`,
                     buttons: [{
                         type: "primary",
-                        href: `/mixed${
-                            navigator.userAgent.includes("Firefox") ? "#firefox" :
-                                navigator.userAgent.includes("Android") ? "#android" : ""
-                        }`,
+                        href: `/mixed${navigator.userAgent.includes("Firefox") ? "#firefox" :
+                            navigator.userAgent.includes("Android") ? "#android" : ""
+                            }`,
                         text: "Attiva",
                         newtab: true
                     },
@@ -546,7 +544,7 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
 
                 await fetch(player.src())
                     .then(response => httpError = `${response.status} ${response.statusText}`)
-                    .catch(() => {});
+                    .catch(() => { });
 
                 createErrorModal({
                     title: locale["channelError"],
@@ -583,7 +581,7 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
 
                 await fetch(player.src())
                     .then(response => httpError = `${response.status} ${response.statusText}`)
-                    .catch(() => {});
+                    .catch(() => { });
 
                 createErrorModal({
                     title: locale["channelError"],
@@ -610,10 +608,10 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
 
                 await fetch(player.src())
                     .then(response => httpStatus = `${response.status} ${response.statusText}`)
-                    .catch(() => {});
+                    .catch(() => { });
 
                 let videojsLog = videojs.log.history().slice(Math.max(videojs.log.history().length - 50, 1)).map(el => el.map(key => typeof key === "object" ? JSON.stringify(key) : key).join(" ")).join("\n");
-                
+
                 createErrorModal({
                     title: locale["channelError"],
                     error: `${locale["cantLoad"]} <b>${name}</b> <i>(${url})</i> ${locale["unknownError"]}.`,
@@ -676,7 +674,7 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
         ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
         canvas.toBlob((blob) => {
             const artworkURL = URL.createObjectURL(blob);
-    
+
             if ("mediaSession" in navigator) {
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: `${name} - Zappr`,
@@ -696,7 +694,7 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
 
     if (document.querySelector(".modal.is-visible") != null) document.querySelector(".modal").classList.remove("is-visible");
 
-    switch(currentType) {
+    switch (currentType) {
         case "twitch":
         case "youtube":
         case "iframe":
@@ -711,7 +709,7 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
             document.querySelector(".vjs-big-play-button").style.cssText = "";
             window.zappr.popupPlayer.close();
             break;
-            
+
     };
 
     if (type === "popup") {
@@ -754,7 +752,7 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
 
         currentType = "popup";
     } else {
-        switch(type) {
+        switch (type) {
             case "hls":
             case "dash":
             case "audio":
@@ -762,8 +760,8 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
                     src: url,
                     type: type === "hls" ? "application/x-mpegURL"
                         : type === "dash" ? "application/dash+xml"
-                        : type === "audio" ? "audio/mpeg"
-                        : "",
+                            : type === "audio" ? "audio/mpeg"
+                                : "",
                     keySystems: drm ? drm : {}
                 });
                 break;
@@ -776,14 +774,14 @@ const loadStream = async ({ type, url, api = false, name, lcn, logo, fullLogo, r
             case "youtube":
             case "iframe":
                 if (!["twitch", "youtube", "iframe"].includes(currentType)) player.reset();
-                
+
                 let iframe;
                 if (document.querySelector("iframe") === null) {
                     iframe = document.createElement("iframe");
                 } else {
                     iframe = document.querySelector("iframe");
                 };
-                
+
                 iframe.allowFullscreen = true;
                 iframe.allow = "autoplay *; encrypted-media *;";
                 iframe.scrolling = "no";
@@ -827,7 +825,7 @@ const loadChannel = async ({ type, url, api = false, name, lcn, logo, fullLogo, 
     document.querySelector("#hide-player").media = "not all";
     if (url.startsWith("zappr://")) {
         const parameter = url.split("/")[3];
-        switch(url.split("/")[2]) {
+        switch (url.split("/")[2]) {
 
             case "sky":
                 await fetch(`https://apid.sky.it/vdp/v1/getLivestream?id=${parameter}&isMobile=false`)
@@ -1058,8 +1056,8 @@ const loadChannel = async ({ type, url, api = false, name, lcn, logo, fullLogo, 
 
         };
     } else if (license) {
-        switch(license) {
-            
+        switch (license) {
+
             case "xdevel-wms":
                 await fetch("https://play.xdevel.com/was")
                     .then(response => response.json())
@@ -1083,13 +1081,13 @@ const loadChannel = async ({ type, url, api = false, name, lcn, logo, fullLogo, 
                     } else {
                         const authData = await fetch(`${window["zappr"].config.backend.host["alwaysdata"]}/rai-akamai`, { method: "POST" })
                             .then(response => response.json());
-                        
+
                         window.zappr.raiAkamai = {
                             ...authData,
                             expiration: parseInt(new URLSearchParams(authData.auth).get("hdnea").split("~").filter(el => el.startsWith("exp"))[0].split("=")[1])
                         };
                     };
-    
+
                     loadStream({
                         type: type,
                         url: `${url}${zappr.raiAkamai.auth}`,
@@ -1168,7 +1166,7 @@ const getChannelLogoURL = (logo, optimized) => {
         if (optimized === false) {
             return `${config.host}/${selectedCountry}/${logo}${logo.endsWith(".svg") ? "" : ".png"}`;
         } else {
-            return `${config.host}/${selectedCountry}/${config.optimized ? "optimized/": ""}${logo}${logo.endsWith(".svg") ? "" : (config.optimized ? ".webp" : ".png")}`;
+            return `${config.host}/${selectedCountry}/${config.optimized ? "optimized/" : ""}${logo}${logo.endsWith(".svg") ? "" : (config.optimized ? ".webp" : ".png")}`;
         }
     };
 };
@@ -1219,7 +1217,7 @@ const generateChannelHTML = (channel, index) => {
         if (navigator.userAgentData && navigator.userAgentData.brands.some(data => data.brand === "Chromium") && channel.nativeHLS.quality) channel.cssfix = `native-hls-${channel.nativeHLS.quality}-iframe`;
     };
 
-    const className = `${channel.hbbtvapp ? "hbbtv-app" : ""}${channel.url && channel.url.includes("pluto.tv") ? "pluto-channel" : ""} ${index === zappr.channels.length - 1 ? "last-channel" : ""} ${channel.hbbtvmosaic ? "hbbtv-enabler hbbtv-mosaic": "channel"} ${favorites.includes(`${channel.lcn}|${channel.name}`) ? "marked-as-favorite" : ""} ${channel.adult === true ? "adult" : channel.adult === "night" ? "adult at-night" : ""}`.trim().replaceAll(/\s+/g, " ");
+    const className = `${channel.hbbtvapp ? "hbbtv-app" : ""}${channel.url && channel.url.includes("pluto.tv") ? "pluto-channel" : ""} ${index === zappr.channels.length - 1 ? "last-channel" : ""} ${channel.hbbtvmosaic ? "hbbtv-enabler hbbtv-mosaic" : "channel"} ${favorites.includes(`${channel.lcn}|${channel.name}`) ? "marked-as-favorite" : ""} ${channel.adult === true ? "adult" : channel.adult === "night" ? "adult at-night" : ""}`.trim().replaceAll(/\s+/g, " ");
 
     return `
         ${channel.categorySeparator === undefined
@@ -1241,7 +1239,7 @@ const generateChannelHTML = (channel, index) => {
                         ${channel.ondemand ? `<div class="ondemand"></div>` : ""}
                         ${channel.type === "popup" ? `<div class="external"></div>` : ""}
                         ${channel.adult === true ? `<div class="adult-marker"></div>`
-                            : channel.adult === "night" ? `<div class="adult-marker at-night"></div>` : ""}
+                : channel.adult === "night" ? `<div class="adult-marker at-night"></div>` : ""}
                     </div>
                     ${channel.hbbtvmosaic ? `<div class="hbbtv-enabler-arrow">&gt;</div>` : ""}
                     ${channel.epg ? `
@@ -1260,8 +1258,8 @@ const generateChannelHTML = (channel, index) => {
                 </div>` : ""}
                 ${channel.hbbtv ? `<div class="hbbtv-channels">
                     ${channel.hbbtv.map(subchannel =>
-                        subchannel.categorySeparator === undefined
-                            ? `<div class="channel ${subchannel.hbbtvapp ? "hbbtv-app" : ""} ${subchannel.adult === true ? "adult" : subchannel.adult === "night" ? "adult at-night" : ""}" data-name="${subchannel.name}" data-lowercase-name="${subchannel.name.toLowerCase()}" data-logo="${getChannelLogoURL(subchannel.logo)}" data-full-logo="${getChannelLogoURL(subchannel.logo, false)}" ${subchannel.radio ? `data-radio="${subchannel.radio}"` : ""} ${subchannel.type != undefined ? `data-type="${subchannel.type}"` : ""} ${subchannel.url != undefined ? `data-url="${subchannel.url}"` : ""} data-lcn="${channel.lcn}.${subchannel.sublcn}" ${subchannel.seek ? `data-seek="${subchannel.seek}"` : ""} ${subchannel.disabled ? `disabled data-disabled="${subchannel.disabled}"` : ""} ${!subchannel.disabled && subchannel.http && isiOS ? `disabled data-disabled="http-ios"` : ""} ${!subchannel.disabled && subchannel.geoblock && isGeoblocked && typeof subchannel.geoblock === "boolean" ? `disabled data-disabled="geoblock" title="${returnErrorMessage('geoblock')}"` : ""} ${subchannel.api && (!isGeoblocked || !subchannel.geoblock) ? `data-api="${subchannel.api}"` : ""} ${typeof subchannel.geoblock === "object" && subchannel.geoblock && isGeoblocked && subchannel.geoblock.api != undefined ? `data-api="${subchannel.geoblock.api}"` : ""} ${subchannel.cssfix != undefined && (!isGeoblocked || !subchannel.geoblock) ? `data-cssfix="${subchannel.cssfix}"` : ""} ${subchannel.cssfix === undefined && typeof subchannel.geoblock === "object" && subchannel.geoblock.cssfix && isGeoblocked ? `data-cssfix="${subchannel.geoblock.cssfix}"` : ""} ${subchannel.http ? `data-http="true"` : ""} ${isGeoblocked && typeof subchannel.geoblock === "object" && subchannel.geoblock.license ? `data-license="${subchannel.geoblock.license}"` : subchannel.license != undefined ? `data-license="${subchannel.license}"` : ""} ${isGeoblocked && typeof subchannel.geoblock === "object" && subchannel.geoblock.licensedetails ? `data-license-details="${encodeURI(JSON.stringify(subchannel.geoblock.licensedetails))}"` : subchannel.licensedetails != undefined ? `data-license-details="${encodeURI(JSON.stringify(subchannel.licensedetails))}"` : ""} ${subchannel.feed ? `data-feed="${subchannel.feed}"` : ""} ${subchannel.fallback ? `data-fallback-type="${subchannel.fallback.type}" data-fallback-url="${subchannel.fallback.url}"` : ""} ${subchannel.fallback && subchannel.fallback.api ? `data-fallback-api="${subchannel.fallback.api}"` : ""} ${subchannel.fallback && subchannel.fallback.cssfix ? `data-fallback-cssfix="${subchannel.fallback.cssfix}"` : ""} ${subchannel.fallback && subchannel.fallback.license ? `data-fallback-license="${subchannel.fallback.license}"` : ""} ${subchannel.fallback && subchannel.fallback.licensedetails ? `data-fallback-license-details="${encodeURI(JSON.stringify(subchannel.fallback.licensedetails))}"` : ""} ${subchannel.epg ? `data-epg-source="${subchannel.epg.source}" data-epg-id="${subchannel.epg.id}"` : ""}>
+                    subchannel.categorySeparator === undefined
+                        ? `<div class="channel ${subchannel.hbbtvapp ? "hbbtv-app" : ""} ${subchannel.adult === true ? "adult" : subchannel.adult === "night" ? "adult at-night" : ""}" data-name="${subchannel.name}" data-lowercase-name="${subchannel.name.toLowerCase()}" data-logo="${getChannelLogoURL(subchannel.logo)}" data-full-logo="${getChannelLogoURL(subchannel.logo, false)}" ${subchannel.radio ? `data-radio="${subchannel.radio}"` : ""} ${subchannel.type != undefined ? `data-type="${subchannel.type}"` : ""} ${subchannel.url != undefined ? `data-url="${subchannel.url}"` : ""} data-lcn="${channel.lcn}.${subchannel.sublcn}" ${subchannel.seek ? `data-seek="${subchannel.seek}"` : ""} ${subchannel.disabled ? `disabled data-disabled="${subchannel.disabled}"` : ""} ${!subchannel.disabled && subchannel.http && isiOS ? `disabled data-disabled="http-ios"` : ""} ${!subchannel.disabled && subchannel.geoblock && isGeoblocked && typeof subchannel.geoblock === "boolean" ? `disabled data-disabled="geoblock" title="${returnErrorMessage('geoblock')}"` : ""} ${subchannel.api && (!isGeoblocked || !subchannel.geoblock) ? `data-api="${subchannel.api}"` : ""} ${typeof subchannel.geoblock === "object" && subchannel.geoblock && isGeoblocked && subchannel.geoblock.api != undefined ? `data-api="${subchannel.geoblock.api}"` : ""} ${subchannel.cssfix != undefined && (!isGeoblocked || !subchannel.geoblock) ? `data-cssfix="${subchannel.cssfix}"` : ""} ${subchannel.cssfix === undefined && typeof subchannel.geoblock === "object" && subchannel.geoblock.cssfix && isGeoblocked ? `data-cssfix="${subchannel.geoblock.cssfix}"` : ""} ${subchannel.http ? `data-http="true"` : ""} ${isGeoblocked && typeof subchannel.geoblock === "object" && subchannel.geoblock.license ? `data-license="${subchannel.geoblock.license}"` : subchannel.license != undefined ? `data-license="${subchannel.license}"` : ""} ${isGeoblocked && typeof subchannel.geoblock === "object" && subchannel.geoblock.licensedetails ? `data-license-details="${encodeURI(JSON.stringify(subchannel.geoblock.licensedetails))}"` : subchannel.licensedetails != undefined ? `data-license-details="${encodeURI(JSON.stringify(subchannel.licensedetails))}"` : ""} ${subchannel.feed ? `data-feed="${subchannel.feed}"` : ""} ${subchannel.fallback ? `data-fallback-type="${subchannel.fallback.type}" data-fallback-url="${subchannel.fallback.url}"` : ""} ${subchannel.fallback && subchannel.fallback.api ? `data-fallback-api="${subchannel.fallback.api}"` : ""} ${subchannel.fallback && subchannel.fallback.cssfix ? `data-fallback-cssfix="${subchannel.fallback.cssfix}"` : ""} ${subchannel.fallback && subchannel.fallback.license ? `data-fallback-license="${subchannel.fallback.license}"` : ""} ${subchannel.fallback && subchannel.fallback.licensedetails ? `data-fallback-license-details="${encodeURI(JSON.stringify(subchannel.fallback.licensedetails))}"` : ""} ${subchannel.epg ? `data-epg-source="${subchannel.epg.source}" data-epg-id="${subchannel.epg.id}"` : ""}>
                                 <div class="channel-info">
                                     <div class="lcn">${channel.lcn}.${subchannel.sublcn}</div>
                                     <img class="logo" src="${getChannelLogoURL(subchannel.logo)}" data-full="${getChannelLogoURL(subchannel.logo, false)}" crossorigin="anonymous" loading="lazy" style="--ratio: ${zappr.ratios && zappr.ratios[subchannel.logo] ? zappr.ratios[subchannel.logo] : "0.75"};">
@@ -1276,7 +1274,7 @@ const generateChannelHTML = (channel, index) => {
                                     ${subchannel.ondemand ? `<div class="ondemand"></div>` : ""}
                                     ${subchannel.type === "popup" ? `<div class="external"></div>` : ""}
                                     ${subchannel.adult === true ? `<div class="adult-marker"></div>`
-                                        : subchannel.adult === "night" ? `<div class="adult-marker at-night"></div>` : ""}
+                            : subchannel.adult === "night" ? `<div class="adult-marker at-night"></div>` : ""}
                                 </div>
                                 ${subchannel.epg ? `
                                     <div class="channel-program-progress" title="${locale["viewFullEPG"]}"></div>
@@ -1287,8 +1285,8 @@ const generateChannelHTML = (channel, index) => {
                                     </div>
                                 ` : ""}
                             </div>`
-                            : `<div class="category">${subchannel.categorySeparator}</div>`
-                    ).join("")}
+                        : `<div class="category">${subchannel.categorySeparator}</div>`
+                ).join("")}
                 </div>` : ""}
             ${channel.hbbtv ? `</div>` : ""}`
             : `<h1 id="${channel.id}" class="channel-category">${channel.categorySeparator}</h1>`
@@ -1369,7 +1367,7 @@ if (localStorage.getItem("selected-additional-lists") && isJSON(localStorage.get
                 const { merge } = await import("lodash");
                 window.zappr.epg = merge({}, window.zappr.epg, json);
             })
-            .catch(() => {});
+            .catch(() => { });
         if (listURLToFetch === "data:application/json,{}") {
             collectedAdditionalChannels = collectedAdditionalChannels.concat(additionalLists[list].channels);
             return;
@@ -1418,7 +1416,7 @@ if (localStorage.getItem("region") != null && localStorage.getItem("region") != 
         .then(response => response.json())
         .then(json => {
             window.zappr.regionalChannels = json.channels;
-            
+
             window.zappr.channels = window.zappr.nationalChannels.concat(window.zappr.regionalChannels);
             window.zappr.channels.sort((a, b) => a.lcn - b.lcn);
         });
@@ -1459,7 +1457,7 @@ const generateChannelElementHeight = (ratio, epg, mosaic, categorySeparator) => 
 
     let logoHeight = ratio * 80;
     if (logoHeight > 5 * documentFontSize) logoHeight = 5 * documentFontSize;
-    
+
     if (mosaic) {
         if (logoHeight < 2.65 * documentFontSize) logoHeight = 2.65 * documentFontSize;
         return (4 * documentFontSize) + logoHeight + 1;
@@ -1533,9 +1531,9 @@ const channelOnClick = async (e) => {
             };
             currentlyPlaying = el;
 
-        if (state.schedule != {}) {
-            createScheduler("").remove();
-        };
+            if (state.schedule != {}) {
+                createScheduler("").remove();
+            };
 
             if (document.querySelector(".watching") != null) {
                 document.querySelector(".watching").classList.remove("watching");
@@ -1545,13 +1543,13 @@ const channelOnClick = async (e) => {
             };
             el.classList.add("watching");
 
-        if (el.dataset.lcn === "3" && el.dataset.name.includes("TGR")) {
-            const regionalPrograms = await fetch("https://www.rainews.it/dl/rai24/assets/json/palinsesto-tgr.json")
-                .then(response => response.json());
+            if (el.dataset.lcn === "3" && el.dataset.name.includes("TGR")) {
+                const regionalPrograms = await fetch("https://www.rainews.it/dl/rai24/assets/json/palinsesto-tgr.json")
+                    .then(response => response.json());
 
-            createScheduler(regionalPrograms).start();
-            return;
-        };
+                createScheduler(regionalPrograms).start();
+                return;
+            };
 
             if (document.querySelector(`style.cssfix[media=""]`) != null) {
                 document.querySelector(`style.cssfix[media=""]`).media = "not all";
@@ -1578,7 +1576,7 @@ const channelOnClick = async (e) => {
                     el.closest(".hbbtv-container").querySelector(".hbbtv-enabler").classList.add("clicked");
                 };
             };
-            
+
             if (el.classList.contains("adult")) {
                 if (!el.classList.contains("at-night") && window.sessionStorage.getItem("adultChannelConfirmation") != "true") {
                     adultChannelConfirmation();
@@ -1634,15 +1632,15 @@ const channelOnClick = async (e) => {
                 if (epgByDays[day].length <= 1) delete epgByDays[day];
             });
             if (Object.keys(epgByDays).length > 1) document.querySelector("#epg-date").className = "first-day"
-                else document.querySelector("#epg-date").className = "first-day last-day";
+            else document.querySelector("#epg-date").className = "first-day last-day";
             for (const day in epgByDays) {
                 document.querySelector("#epg").insertAdjacentHTML("beforeend", `<div class="epg-items" data-date="${day}">
                     ${epgByDays[day].map(entry => {
-                        const now = Date.now();
-                        const expandable = entry.image && entry.description && entry.description.length > 75 ? true :
-                            !entry.image && entry.description && entry.description.length > 145 ? true : false;
+                    const now = Date.now();
+                    const expandable = entry.image && entry.description && entry.description.length > 75 ? true :
+                        !entry.image && entry.description && entry.description.length > 145 ? true : false;
 
-                        return `<div class="epg-item-container${expandable ? " expandable" : ""}${entry.startTime.unix <= now && entry.endTime.unix >= now ? " on-air" : ""}${!entry.image ? " no-image" : ""}" ${entry.image ? `style="background-image: url('${entry.image}');"` : ""} data-start-time="${entry.startTime.unix}">
+                    return `<div class="epg-item-container${expandable ? " expandable" : ""}${entry.startTime.unix <= now && entry.endTime.unix >= now ? " on-air" : ""}${!entry.image ? " no-image" : ""}" ${entry.image ? `style="background-image: url('${entry.image}');"` : ""} data-start-time="${entry.startTime.unix}">
                             <div class="epg-item">
                                 ${entry.image ? `<img src="${entry.image}" class="epg-image" onerror="this.parentElement.parentElement.classList.add('no-image'); this.remove();">` : ""}
                                 <div class="epg-info">
@@ -1656,7 +1654,7 @@ const channelOnClick = async (e) => {
                                 </div>
                             </div>
                         </div>`
-                    }).join("")}
+                }).join("")}
                 </div>`);
                 if (document.querySelector(".epg-item-container.on-air") === null) document.querySelector(`.epg-items[data-date="${day}"]`).remove();
             };
@@ -1717,7 +1715,7 @@ const sourceHeaderOnScroll = () => {
             };
         };
     });
-    
+
 };
 
 let epgUpdateLastCallTime = 0;
@@ -1799,17 +1797,17 @@ const state = {
     timeouts: new Map(),
     playingRegional: false
 };
-  
+
 const parseTime = (timeStr) => {
     const [hours, minutes] = timeStr.split(":").map(Number);
     return hours * 60 + minutes;
 };
-  
+
 const getCurrentTime = () => {
     const now = new Date();
     return now.getHours() * 60 + now.getMinutes();
 };
-  
+
 const getCurrentDay = () => new Date().getDay();
 
 const isSpecificDate = (program) => "day" in program;
@@ -1819,13 +1817,13 @@ const isProgramActive = (program) => {
     const currentTime = getCurrentTime();
     const startTime = parseTime(program.from);
     const endTime = parseTime(program.to);
-    
+
     if (isSpecificDate(program)) {
         const programDate = new Date(program.day);
         const isSameDate = now.toDateString() === programDate.toDateString();
         return isSameDate && currentTime >= startTime && currentTime < endTime;
     };
-    
+
     const currentDay = getCurrentDay();
     return program.days.includes(currentDay) && currentTime >= startTime && currentTime < endTime;
 };
@@ -1873,7 +1871,7 @@ const scheduleProgram = (program) => {
         const now = new Date();
         const endTime = new Date(now.toDateString() + " " + program.to);
         const timeUntilEnd = endTime.getTime() - now.getTime();
-        
+
         const endTimeoutId = setTimeout(() => {
             loadChannel({
                 type: window.zappr.channels.filter(el => el.lcn === 103)[0].type,
@@ -1885,7 +1883,7 @@ const scheduleProgram = (program) => {
             });
             scheduleProgram(program);
         }, timeUntilEnd);
-        
+
         state.timeouts.set(`${program.title}-end`, endTimeoutId);
         loadChannel({
             type: window.zappr.channels.filter(el => el.lcn === 3)[0].type,
@@ -1922,10 +1920,10 @@ const scheduleProgram = (program) => {
             logo: getChannelLogoURL("rai3.svg")
         });
         state.playingRegional = true;
-        
+
         const endTime = new Date(nextAirTime.toDateString() + " " + program.to);
         const timeUntilEnd = endTime.getTime() - nextAirTime.getTime();
-        
+
         const endTimeoutId = setTimeout(() => {
             loadStream({
                 type: window.zappr.channels.filter(el => el.lcn === 103)[0].type,
@@ -1936,10 +1934,10 @@ const scheduleProgram = (program) => {
             });
             scheduleProgram(program);
         }, timeUntilEnd);
-        
+
         state.timeouts.set(`${program.title}-end`, endTimeoutId);
-      }, timeUntilAir);
-    
+    }, timeUntilAir);
+
 
     state.timeouts.set(program.title, timeoutId);
 };
@@ -1967,7 +1965,7 @@ const createScheduler = (scheduleData) => ({
 
 const addAutoRestart = (el, startTime, manual) => {
     if (!el.querySelector(".epg-restart")) {
-        el.querySelector(".epg-buttons").insertAdjacentHTML("beforeend", `<div class="epg-restart${manual ? " manual": ""}"><img src="${restartIcon}">Restart</div>`);
+        el.querySelector(".epg-buttons").insertAdjacentHTML("beforeend", `<div class="epg-restart${manual ? " manual" : ""}"><img src="${restartIcon}">Restart</div>`);
         el.querySelector(".epg-restart").addEventListener("click", () => {
             if (!document.querySelector(`iframe[src*="clearkey/"]`)) player.currentTime(player.liveTracker.liveCurrentTime() - ((DateTime.now().ts - startTime) / 1000) + 10);
             else {
@@ -1986,13 +1984,13 @@ const addAutoRestart = (el, startTime, manual) => {
 let manualRestart = {
     fetchCache: {},
     run: async (channel, source, data) => {
-        let seekToStart = () => {};
+        let seekToStart = () => { };
         switch (source) {
             case "mediaset":
                 const restartInfo = await fetch(`${data.restartUrl}?auto=true&balance=true&format=SMIL&formats=MPEG-DASH,MPEG4,M3U&tracking=true&assetTypes=HD,browser,widevine,geoIT|geoNo:HD,browser,geoIT|geoNo:HD,geoIT|geoNo:SD,browser,widevine,geoIT|geoNo:SD,browser,geoIT|geoNo:SD,geoIT|geoNo`)
                     .then(response => response.text())
                     .then(smil => new DOMParser().parseFromString(smil, "text/xml"));
-                
+
                 const restartURL = restartInfo.querySelector("ref").getAttribute("src").replaceAll("manifest_hr.mpd", "manifest.mpd");
                 if (restartURL.includes("widevine")) {
                     const authToken = await fetch("https://api-ott-prod-fe.mediaset.net/PROD/play/idm/anonymous/login/v2.0", {
@@ -2009,9 +2007,11 @@ let manualRestart = {
                         .then(json => json.response.beToken);
 
                     const releasePID = restartInfo.querySelector("param").getAttribute("value").split("|").filter(el => el.startsWith("pid="))[0].split("=")[1];
-                    await loadStream({ type: "dash", url: restartURL, name: `${channel.dataset.name} (restart)`, lcn: channel.dataset.lcn, logo: channel.dataset.logo, drm: {
-                        "com.widevine.alpha": `https://widevine.entitlement.theplatform.eu/wv/web/ModularDrm/getRawWidevineLicense?releasePid=${releasePID}&account=http://access.auth.theplatform.com/data/Account/2702976343&schema=1.0&token=${authToken}`
-                    } });
+                    await loadStream({
+                        type: "dash", url: restartURL, name: `${channel.dataset.name} (restart)`, lcn: channel.dataset.lcn, logo: channel.dataset.logo, drm: {
+                            "com.widevine.alpha": `https://widevine.entitlement.theplatform.eu/wv/web/ModularDrm/getRawWidevineLicense?releasePid=${releasePID}&account=http://access.auth.theplatform.com/data/Account/2702976343&schema=1.0&token=${authToken}`
+                        }
+                    });
 
                 } else {
                     const hlsRestartInfo = await fetch(`${data.restartUrl}?auto=true&balance=true&format=SMIL&formats=MPEG4,M3U&tracking=true&assetTypes=HD,browser,geoIT|geoNo:HD,browser,geoIT|geoNo:HD,geoIT|geoNo:SD,browser,geoIT|geoNo:SD,browser,geoIT|geoNo:SD,geoIT|geoNo`)
@@ -2115,7 +2115,7 @@ let manualRestart = {
                 } else {
                     alert("Impossibile effettuare il restart. Se il programma è iniziato da poco prova ad aspettare qualche minuto.");
                 };
-                
+
                 break;
 
         };
@@ -2150,7 +2150,7 @@ let manualRestart = {
                         } else if (startTime.ts >= DateTime.now().ts - ((player.seekable().end(0) - player.seekable().start(0)) * 1000) && startTime.ts <= DateTime.now().ts) addAutoRestart(els[el], startTime.ts, true);
                     };
                     break;
-                    
+
                 case "mediaset":
                     if (ipLocation === selectedCountry) {
                         if (manualRestart.fetchCache[source] && manualRestart.fetchCache[source][id]) json = manualRestart.fetchCache[source][id];
@@ -2162,6 +2162,9 @@ let manualRestart = {
                         };
 
                         if (els[el].classList.contains("on-air") && json.response.currentListing.mediasetlisting$restartAllowed) manualRestart.addButton(els[el], channel, source, json.response.currentListing);
+                    };
+                    break;
+
                 case "la7":
                     if (manualRestart.fetchCache[source] && manualRestart.fetchCache[source][id]) json = manualRestart.fetchCache[source][id];
                     else {
@@ -2181,7 +2184,7 @@ let manualRestart = {
                         if (entryStartTime >= rangeStart && entryStartTime <= rangeEnd) manualRestart.addButton(els[el], channel, source, entry.nid);
                         else if (startTime.ts >= DateTime.now().ts - ((player.seekable().end(0) - player.seekable().start(0)) * 1000) && startTime.ts <= DateTime.now().ts && !els[el].classList.contains("on-air")) addAutoRestart(els[el], startTime.ts, true);
                     });
-                    
+
                     if (els[el].classList.contains("on-air")) {
                         const onAirStartTime = await fetch(`https://static.iltrovatore.it/StreamingStatus/${id}.rivedi2.txt`)
                             .then(response => response.text())
@@ -2199,7 +2202,7 @@ let manualRestart = {
                             manualRestart.fetchCache[source] = {};
                             manualRestart.fetchCache[source][id] = json;
                         };
-    
+
                         json.epgList.filter(entry => entry.isRestartable).forEach(entry => {
                             let entryStartTime = DateTime.fromISO(entry.epgEventStart).setZone("Europe/Rome").ts;
                             if (entryStartTime >= rangeStart && entryStartTime <= rangeEnd && !entry.restartUrl.includes("undefined") && entryStartTime < DateTime.now().ts) manualRestart.addButton(els[el], channel, source, {
@@ -2229,7 +2232,7 @@ let manualRestart = {
 
                             let epgConfig = await fetch(`https://datahub.enhanced.tools/configs/bundles/epg/config.json`)
                                 .then(response => response.json());
-                                
+
                             json = {
                                 startOverWindow: startOverWindow,
                                 epgConfig: epgConfig,
@@ -2240,7 +2243,7 @@ let manualRestart = {
                             manualRestart.fetchCache[source] = {};
                             manualRestart.fetchCache[source][id] = json;
                         };
-    
+
                         if (startTime.ts > DateTime.now().ts - json.startOverWindow && startTime.ts < DateTime.now().ts && els[el].classList.contains("on-air")) {
                             manualRestart.addButton(els[el], channel, source, {
                                 buffer: parseInt(json.epgConfig.channelDelay),
@@ -2266,7 +2269,7 @@ const updateRestartablePrograms = async (manual = false) => {
         });
         document.querySelector(".epg-item-container.on-air .epg-start-time:not(.clickable)").classList.add("clickable");
     };
-    if (manual) manualRestart.fetchCache = {};  
+    if (manual) manualRestart.fetchCache = {};
     document.querySelectorAll(".epg-restart:not(.manual)").forEach(el => el.remove());
     if (document.querySelector(".channel.watching") && document.querySelector(".channel.watching").dataset.epgSource && document.querySelector("#channels-column").classList.contains("epg-visible") && document.querySelector(`#epg[data-epg-source="${document.querySelector(".channel.watching").dataset.epgSource}"][data-epg-id="${document.querySelector(".channel.watching").dataset.epgId}"]`)) {
         document.querySelectorAll(".epg-item-container").forEach(el => {
@@ -2286,18 +2289,18 @@ const selectChannel = async (channel, zapping, scroll = false) => {
     document.querySelector("#search-results").innerHTML = "";
     let targetedChannel;
 
-    if (typeof(channel) === "number" || typeof(channel) === "string") targetedChannel = document.querySelector(`[data-lcn="${channel}"]`);
-    else if (typeof(channel) === "object") targetedChannel = channel;
-    
+    if (typeof (channel) === "number" || typeof (channel) === "string") targetedChannel = document.querySelector(`[data-lcn="${channel}"]`);
+    else if (typeof (channel) === "object") targetedChannel = channel;
+
     if (targetedChannel === null) {
         let parentChannel = channel.toString();
         if (parentChannel.includes(".")) parentChannel = parentChannel.split(".")[0];
         const channelIndex = zappr.channels.indexOf(zappr.channels.filter(el => el.lcn === parseInt(parentChannel))[0]);
         virtualList.scrollToIndex(channelIndex);
         updateCurrentlyPlayingEPG();
-        
-        if (typeof(channel) === "number" || typeof(channel) === "string") targetedChannel = document.querySelector(`[data-lcn="${channel}"]`);
-        else if (typeof(channel) === "object") targetedChannel = channel;
+
+        if (typeof (channel) === "number" || typeof (channel) === "string") targetedChannel = document.querySelector(`[data-lcn="${channel}"]`);
+        else if (typeof (channel) === "object") targetedChannel = channel;
     };
     setTimeout(() => {
         try {
@@ -2305,7 +2308,7 @@ const selectChannel = async (channel, zapping, scroll = false) => {
                 block: "center",
                 behavior: "smooth"
             });
-        } catch {};
+        } catch { };
     }, targetedChannel != undefined && targetedChannel.dataset.lcn.includes(".") && !zapping ? 250 : 0);
     document.querySelectorAll(".highlighted").forEach(el => el.classList.remove("highlighted"));
     targetedChannel.classList.add("highlighted");
@@ -2352,7 +2355,7 @@ const toggleNightAdultChannelsStyle = () => {
     const now = new Date();
     const currentHour = now.getHours();
     const nextToggleTime = new Date();
-    
+
     if (currentHour >= 23 || currentHour < 7) {
         nightAdultChannelsStyle.media = "not all";
         nextToggleTime.setHours(7, 0, 0, 0);
@@ -2384,13 +2387,13 @@ const keydownHandler = (e) => {
         const lcnTypingElement = document.querySelector("#lcn-typing"),
             lcnTypedElement = document.querySelector("#lcn-typed"),
             controlsElement = document.querySelector("#controls");
-        
+
         let matchedChannel = window.zappr.channels.filter(ch => ch.lcn === parseInt(lcnTypedElement.innerText));
 
         if ((lcnTypedElement.innerText.includes(".") && matchedChannel[0] != undefined && matchedChannel[0].hbbtv && matchedChannel[0].hbbtv.filter(subch => subch.sublcn == lcnTypedElement.innerText.split(".")[1]).length === 0) || (lcnTypedElement.innerText.includes(".") && matchedChannel[0] != undefined && !matchedChannel[0].hbbtv)) {
             matchedChannel = [];
         };
-        
+
         if (!multipleChannelSelection && e.code.startsWith("Digit") || (e.code.startsWith("Numpad") && e.code.length === 7) || e.key === "." || e.code === "NumpadDecimal") {
             typingLCN = true;
             lcnTypingElement.style.display = "block";
@@ -2400,7 +2403,7 @@ const keydownHandler = (e) => {
         };
 
         if (typingLCN) {
-            switch(e.code) {
+            switch (e.code) {
                 case "Backspace":
                 case "Delete":
                 case "NumpadDivide":
@@ -2503,7 +2506,7 @@ const keydownHandler = (e) => {
     if (new URLSearchParams(location.search).get("androidtv") != null) {
         let allNavigableElements = Array.from(document.querySelectorAll("*:not(.hbbtv-channels) > .channel:not(.hbbtv-app), .hbbtv-enabler, .hbbtv-enabler.clicked + .hbbtv-channels .channel"));
         if (document.querySelector(".source-header") && (document.querySelector("#channels").scrollTop === 0 || document.querySelector(".source-header .androidtv-active"))) allNavigableElements = Array.from(document.querySelectorAll(".source-header.first-source .next, .source-header.last-source .previous, .source-header:not(.first-source, .last-source) .previous, .source-header:not(.first-source, .last-source) .next")).concat(allNavigableElements);
-        
+
         if (window.location.hash != "#canPressBack") window.location.hash = "canPressBack";
         if (!document.querySelector("#settings").classList.contains("visible")) {
             e.preventDefault();
@@ -2590,15 +2593,15 @@ document.querySelectorAll(".tooltip").forEach(el => {
                                             ${Array.from(postContent.querySelectorAll("p")).map(paragraph => paragraph.innerText).join("<br><br>").replaceAll("\n", "<br>")}
                                         </a>
                                         ${post.children[post.children.length - 1].tagName === "media:content" && post.children[post.children.length - 1].getAttribute("type").startsWith("image/")
-                                            ? `<img class="news-image" src="${post.children[post.children.length - 1].getAttribute("url").replaceAll("/original/", "/small/")}" data-zoom-src="${post.children[post.children.length - 1].getAttribute("url")}">`
-                                            : ""
-                                        }
+                                        ? `<img class="news-image" src="${post.children[post.children.length - 1].getAttribute("url").replaceAll("/original/", "/small/")}" data-zoom-src="${post.children[post.children.length - 1].getAttribute("url")}">`
+                                        : ""
+                                    }
                                     </div>
                                 `)
                             };
                         });
                     });
-                
+
                 const mediumZoom = (await import("medium-zoom")).default;
                 mediumZoom(".news-image", { background: "rgba(0, 0, 0, 0.8)", margin: 32 });
                 document.querySelector("#news").classList.remove("news-not-loaded");
@@ -2983,7 +2986,7 @@ const enterListEditor = async (listUUID = null) => {
             formGroup.classList.add("form-group");
             formGroup.classList.add(editorProperties[property].type);
             const formGroupLabel = document.createElement("label");
-            formGroupLabel.innerText = typeof(locale.channelEditorSchema[property]) === "object" ? locale.channelEditorSchema[property][0] : locale.channelEditorSchema[property];
+            formGroupLabel.innerText = typeof (locale.channelEditorSchema[property]) === "object" ? locale.channelEditorSchema[property][0] : locale.channelEditorSchema[property];
             formGroupLabel.setAttribute("for", `edit-channel-input--${property}`);
 
             const formGroupInput = editorProperties[property]["enum"] ? document.createElement("select") : document.createElement("input");
@@ -3043,7 +3046,7 @@ const enterListEditor = async (listUUID = null) => {
                     currentLists[listUUID].channels[oldChannelIndex] = patchedChannelData;
                 };
             } else currentLists[listUUID].channels.push(patchedChannelData);
-            
+
             saveChanges();
             const nextChannelSibling = Array.from(document.querySelector("#list-channels").children).filter(el => parseInt(el.dataset.lcn) > patchedChannelData.lcn)[0];
             if (nextChannelSibling) {
@@ -3096,7 +3099,7 @@ const deleteList = (id) => {
     const isAdditionalList = document.querySelector("#list-picker").classList.contains("second-tab-active");
     if (isAdditionalList) delete additionalLists[id];
     else delete baseLists[id];
-    
+
     localStorage.setItem(isAdditionalList ? "additional-lists" : "base-lists", JSON.stringify(isAdditionalList ? additionalLists : baseLists));
     const listContainer = isAdditionalList ? document.querySelector("#additional-list-tab") : document.querySelector("#base-list-tab");
     listContainer.querySelector(`.list[data-id="${id}"]`).remove();
@@ -3111,13 +3114,13 @@ if (todoEditFavorites) {
 
 const addCustomList = ({ id, name, publisher, icon = null, publisherLink = null, donationLink = null, epg, channels = id }) => {
     const isAdditionalList = document.querySelector("#list-picker").classList.contains("second-tab-active");
-    
+
     const listStorage = isAdditionalList ? "additional-lists" : "base-lists";
     let currentLists = JSON.parse(localStorage.getItem(listStorage)) ?? {};
     if (!currentLists[id]) {
         currentLists[id] = { channels, name, publisher, icon, publisherLink, donationLink, epg };
         localStorage.setItem(listStorage, JSON.stringify(currentLists));
-    
+
         const activeTab = isAdditionalList ? document.querySelector("#additional-list-tab") : document.querySelector("#base-list-tab");
         activeTab.querySelector(".add-list").insertAdjacentHTML("beforebegin", generateListHTML({ id, name, publisher, icon, publisherLink, donationLink }));
         addListEventListeners(document.querySelector(`.list[data-id="${id}"]`), isAdditionalList);
@@ -3126,7 +3129,7 @@ const addCustomList = ({ id, name, publisher, icon = null, publisherLink = null,
     } else alert(`${locale["alreadyAddedRemoteList"]} (${currentLists[id].name}).`);
 };
 
-const fetchCustomList = async (url) => { 
+const fetchCustomList = async (url) => {
     let listJSON;
     const isLocalExport = url.startsWith("data:application/gzip,");
     if (isLocalExport) {
@@ -3171,7 +3174,7 @@ const updateSelectWidth = (e) => {
     if (target.children.length >= 1) {
         let tempSelect = document.createElement("select"),
             tempOption = document.createElement("option");
-      
+
         if (target.querySelector("[selected]")) {
             tempOption.textContent = target.querySelector("[selected]").text;
         } else {
@@ -3183,7 +3186,7 @@ const updateSelectWidth = (e) => {
         `;
         tempSelect.appendChild(tempOption);
         target.after(tempSelect);
-        
+
         const tempSelectWidth = tempSelect.getBoundingClientRect().width;
         target.style.width = `${tempSelectWidth}px`;
         tempSelect.remove();
@@ -3323,10 +3326,10 @@ const updateCurrentlyPlayingEPG = async () => {
             if (nowOnAir) {
                 currentChannel.classList.remove("epg-disabled");
                 currentChannel.querySelector(".channel-program").innerHTML = `${nowOnAir.name}${nowOnAir.season ? ` <b>S${nowOnAir.season}</b>` : " "}${nowOnAir.episode ? `<b>E${nowOnAir.episode}</b>` : ""}`;
-    
+
                 currentChannel.querySelector(".channel-program-start-time").innerText = DateTime.fromMillis(nowOnAir.startTime.unix).toFormat("HH:mm");
                 currentChannel.querySelector(".channel-program-end-time").innerText = DateTime.fromMillis(nowOnAir.endTime.unix).toFormat("HH:mm");
-    
+
                 const progressPercentage = ((now - nowOnAir.startTime.unix) / (nowOnAir.endTime.unix - nowOnAir.startTime.unix)) * 100;
                 currentChannel.querySelector(".channel-program-progress").style.width = `${progressPercentage}%`;
 
@@ -3347,7 +3350,7 @@ const baseEPGToFetch =
     localStorage.getItem("selected-base-list") != "default" && localStorage.getItem("selected-base-list") != "favorites"
         ? baseLists[localStorage.getItem("selected-base-list")]?.epg
             ? baseLists[localStorage.getItem("selected-base-list")].epg
-            : baseLists[localStorage.getItem("selected-base-list")]?.epg === false 
+            : baseLists[localStorage.getItem("selected-base-list")]?.epg === false
                 ? "data:text/html,"
                 : getEPGURL(`${countries[selectedCountry].location}/national`)
         : getEPGURL(`${countries[selectedCountry].location}/national`);
@@ -3366,7 +3369,7 @@ fetch(baseEPGToFetch)
                     window.zappr.regionalEPG = json;
                     window.zappr.epg = merge({}, window.zappr.epg, window.zappr.regionalEPG);
                 })
-                .catch(() => {});
+                .catch(() => { });
         };
 
         updateCurrentlyPlayingEPG();
@@ -3445,9 +3448,9 @@ document.querySelector("#epg-next-day").addEventListener("click", () => {
     });
     if (next != null) {
         if (next.nextElementSibling === null) document.querySelector("#epg-date").classList.add("last-day");
-            else document.querySelector("#epg-date").classList.remove("last-day");
+        else document.querySelector("#epg-date").classList.remove("last-day");
         if (next.previousElementSibling && next.previousElementSibling.id === "epg-header") document.querySelector("#epg-date").classList.add("first-day");
-            else document.querySelector("#epg-date").classList.remove("first-day");
+        else document.querySelector("#epg-date").classList.remove("first-day");
 
         next.animate({
             left: "0"
@@ -3467,9 +3470,9 @@ document.querySelector("#epg-next-day").addEventListener("click", () => {
                 { transform: "translateX(25%)", opacity: 0 },
                 { transform: "translateX(0)", opacity: 1 }
             ],
-            {
-                duration: 500, fill: "forwards", easing: "ease"
-            });
+                {
+                    duration: 500, fill: "forwards", easing: "ease"
+                });
         }, 250);
     };
 });
@@ -3484,9 +3487,9 @@ document.querySelector("#epg-previous-day").addEventListener("click", () => {
     });
     if (prev != null) {
         if (prev.nextElementSibling === null) document.querySelector("#epg-date").classList.add("last-day");
-            else document.querySelector("#epg-date").classList.remove("last-day");
+        else document.querySelector("#epg-date").classList.remove("last-day");
         if (prev.previousElementSibling && prev.previousElementSibling.id === "epg-header") document.querySelector("#epg-date").classList.add("first-day");
-            else document.querySelector("#epg-date").classList.remove("first-day");
+        else document.querySelector("#epg-date").classList.remove("first-day");
 
         prev.animate({
             left: "0"
@@ -3506,9 +3509,9 @@ document.querySelector("#epg-previous-day").addEventListener("click", () => {
                 { transform: "translateX(-25%)", opacity: 0 },
                 { transform: "translateX(0%)", opacity: 1 }
             ],
-            {
-                duration: 500, fill: "forwards", easing: "ease"
-            });
+                {
+                    duration: 500, fill: "forwards", easing: "ease"
+                });
         }, 250);
     };
 });
