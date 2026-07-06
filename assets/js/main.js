@@ -146,7 +146,7 @@ try {
     fetch(`${zappr.config.urgentalerts.host}/${selectedCountry}`)
         .then(response => { if (response.ok) return response.text(); })
         .then(html => {
-            if (html) {
+            if (html && document.querySelector("#urgent-alerts")) {
                 document.querySelector("#urgent-alerts").classList.add("active");
                 document.querySelector("#urgent-alerts").innerHTML = html;
             };

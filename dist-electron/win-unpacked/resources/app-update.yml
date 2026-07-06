@@ -1,0 +1,4 @@
+owner: ZapprTV
+repo: Zappr
+provider: github
+updaterCacheDirName: zappr-updater

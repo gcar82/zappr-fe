@@ -1,7 +1,7 @@
 import { build } from "vite";
-import { join as joinPath } from "path";
+import { join as joinPath, isAbsolute as isAbsolutePath, resolve as resolvePath } from "path";
 import { clone as gitClone } from "isomorphic-git";
-import * as http from "isomorphic-git/http/node/index.cjs";
+import http from "isomorphic-git/http/node";
 import * as fs from "fs";
 
 const parseArgv = (argv) => {
@@ -17,22 +17,27 @@ const parseArgv = (argv) => {
 };
 const argv = parseArgv(process.argv);
 
-await build();
+const buildOverrides = argv.target ? { build: { target: argv.target } } : {};
+await build(buildOverrides);
 
 if (argv.bundleChannels === true) {
     const dir = joinPath(process.cwd(), "dist", "channels"),
-          channelsBundleURL = argv.channelsURL ?? "https://github.com/ZapprTV/channels.git";
+        channelsBundleURL = argv.channelsURL ?? "https://github.com/ZapprTV/channels.git";
 
     if (channelsBundleURL.endsWith(".git")) {
         await gitClone({
             fs, http, dir, url: channelsBundleURL
         });
-    
+
         await fs.promises.rm(joinPath(dir, ".git"), { recursive: true, force: true }, err => {
             if (err) throw err;
         });
     } else {
-        await fs.promises.cp(joinPath(process.cwd(), channelsBundleURL), joinPath(process.cwd(), "dist", channelsBundleURL), { recursive: true });
+        const source = isAbsolutePath(channelsBundleURL)
+            ? channelsBundleURL
+            : resolvePath(process.cwd(), channelsBundleURL);
+        await fs.promises.rm(dir, { recursive: true, force: true });
+        await fs.promises.cp(source, dir, { recursive: true });
     };
 
     console.log("download dei channels terminato");

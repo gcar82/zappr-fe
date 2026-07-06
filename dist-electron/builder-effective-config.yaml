@@ -1,0 +1,29 @@
+directories:
+  output: dist-electron
+  buildResources: public/assets/icons
+appId: stream.zappr.desktop
+productName: Zappr
+files:
+  - filter:
+      - electron/**/*
+      - package.json
+extraResources:
+  - from: dist
+    to: app.dist
+win:
+  icon: public/assets/icons/pwa-512x512.png
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  shortcutName: Zappr
+portable:
+  artifactName: Zappr-${version}-portable.exe
+electronVersion: 33.4.11

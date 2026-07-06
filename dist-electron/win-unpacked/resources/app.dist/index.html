@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Zappr è il nuovo modo di guardare la TV. Guarda la maggior parte dei canali nazionali e locali del tuo paese, online, gratuitamente e senza configurazioni complesse.">
+    <meta property="og:title" content="Zappr - Watch TV online">
+    <meta property="og:url" content="https://zappr.stream">
+    <meta property="og:description"
+        content="Zappr è il nuovo modo di guardare la TV. Guarda la maggior parte dei canali nazionali e locali del tuo paese, online, gratuitamente e senza configurazioni complesse.">
+    <meta property="og:image" content="/assets/images/og.png">
+    <meta property="og:image:alt"
+        content="Zappr è il nuovo modo di guardare la TV. Guarda la maggior parte dei canali nazionali e locali del tuo paese, online, gratuitamente e senza configurazioni complesse.">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:locale:alternate" content="en_GB">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="/assets/images/og.webp">
+    <link rel="canonical" href="https://zappr.stream">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" href="/assets/icons/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/assets/icons/favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="manifest" href="/assets/site-C9X1nOo8.webmanifest">
+    <meta name="theme-color" content="#242424">
+    <style id="hide-player">
+        #tv {
+            display: none !important;
+            height: 0 !important;
+        }
+
+        @media screen and (max-width: 100vh) {
+
+            #channels,
+            #search-results,
+            #epg {
+                margin-top: 0% !important;
+            }
+
+            #tv {
+                display: block !important;
+                transform: translateY(-100%);
+            }
+
+            #news {
+                height: 100svh;
+            }
+        }
+    </style>
+    <style id="night-adult-channels">
+        .adult-marker.at-night {
+            display: none;
+        }
+    </style>
+    <style id="stretch-fix" class="cssfix" media="not all">
+        video {
+            object-fit: fill;
+            aspect-ratio: 16 / 9;
+            height: auto !important;
+            top: 50% !important;
+            transform: translateY(-50%);
+        }
+    </style>
+    <style id="raiplay-sound-fix" class="cssfix" media="not all">
+        #overlays.hbbtv-app iframe {
+            --hbbtv-wrapper-scale-multiplier: 1.5;
+        }
+    </style>
+    <style id="streamshow-embed-fix" class="cssfix" media="not all">
+        #overlays iframe {
+            height: auto;
+            aspect-ratio: 16 / 9;
+            transform: scale(1.024) translate(8px, calc(-50% / 1.012));
+            position: absolute;
+            top: 50%;
+        }
+
+        #overlays {
+            background: #000;
+            pointer-events: all;
+        }
+    </style>
+    <style id="squashed-height-fix" class="cssfix" media="not all">
+        video {
+            transform: scaleY(1.3333333333);
+        }
+    </style>
+    <style id="very-squashed-height-fix" class="cssfix" media="not all">
+        video {
+            transform: scaleY(2);
+        }
+    </style>
+    <style id="five-two-squashed-height-fix" class="cssfix" media="not all">
+        video {
+            transform: scaleY(1.40625);
+        }
+    </style>
+    <style id="center-iframe-fix" class="cssfix" media="not all">
+        #overlays iframe {
+            height: auto;
+            aspect-ratio: 16 / 9;
+            transform: translateY(-50%);
+            position: absolute;
+            top: 50%;
+        }
+
+        #overlays {
+            background: #000;
+            pointer-events: all;
+        }
+    </style>
+    <style id="servizistreaming-embed-fix" class="cssfix" media="not all">
+        @keyframes servizistreaming-embed-fix {
+            0% {
+                height: calc(100% + 1px);
+            }
+
+            100% {
+                height: 100%;
+            }
+        }
+
+        #overlays iframe {
+            position: absolute;
+            animation: servizistreaming-embed-fix 1s forwards 1s;
+        }
+    </style>
+    <style id="livetvuk-embed-fix" class="cssfix" media="not all">
+        #overlays iframe {
+            width: calc(100% + 16px);
+            transform: translateX(-8px);
+        }
+    </style>
+    <style id="native-hls-720p-iframe-fix" class="cssfix" media="not all">
+        #channels-column {
+            z-index: 4 !important;
+        }
+
+        @media screen and (min-width: 1706.6666px) {
+            #overlays iframe {
+                transform: scale(min(calc(75vw / 1280%), calc(100vh / 720%)));
+            }
+        }
+    </style>
+    <style id="letterbox-fix" class="cssfix" media="not all">
+        video {
+            object-fit: cover;
+            aspect-ratio: 16 / 9;
+            height: auto !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%);
+            width: min(100%, 100vh * 16 / 9) !important;
+        }
+    </style>
+    <style id="raiparlamento-embed-fix" class="cssfix" media="not all">
+        #overlays iframe {
+            height: 110.5%;
+        }
+    </style>
+    <style id="tv-style" media="not all">
+        #tv-settings {
+            font-size: 0.825rem;
+            text-align: right;
+            line-height: 1;
+            font-weight: 400;
+            width: 100%;
+            text-wrap-style: balance;
+            margin-right: 0.75rem;
+            opacity: 0.75;
+            display: block !important;
+        }
+
+        #tv-settings * {
+            line-height: 1;
+        }
+
+        #tv-settings img {
+            height: 0.825rem;
+        }
+
+        #icons>*:not(#settings-icon, #settings, #tv-settings) {
+            display: none;
+        }
+
+        .vjs-skip-backward-5,
+        .vjs-skip-forward-5,
+        .vjs-volume-panel,
+        .vjs-menu-button,
+        .vjs-picture-in-picture-control,
+        .vjs-fullscreen-control,
+        #search-input,
+        #fullscreen-button-container {
+            display: none !important;
+        }
+
+        #settings-icon,
+        .tv-settings-open,
+        .tv-settings-open *,
+        #tv,
+        #tv * {
+            pointer-events: none !important;
+            user-select: none !important;
+        }
+
+        .channel.hbbtv-app,
+        [data-translation-id="language"],
+        #language,
+        [data-translation-id="country"],
+        #country {
+            display: none;
+        }
+
+        #settings {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding-left: 33.33333vw;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            background: transparent;
+        }
+
+        #settings .tooltip-content-box {
+            position: relative;
+            top: 0;
+            right: 0;
+            width: calc(66.6666vw - 4rem);
+            margin: 0.5rem 1rem;
+            padding: 1.5rem 1rem;
+            background: #000000bf;
+            backdrop-filter: blur(1rem);
+            border-radius: 1rem;
+        }
+
+        #region-selector {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        #region-selector div {
+            display: flex;
+            max-width: 100%;
+        }
+
+        #region-selector .regions {
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #region-selector input[type="radio"] {
+            margin: 0;
+            margin-right: 0.3333rem;
+        }
+
+        .region {
+            background: #111;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: 400;
+            margin: 0.25rem;
+        }
+
+        #region {
+            min-width: none !important;
+            margin-top: 1rem;
+            align-items: center;
+        }
+
+        .region-group {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .channel-program-times,
+        .channel-program-progress,
+        .channel-program-progress-background {
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .channel-program {
+            outline: none;
+        }
+
+        *:not(.channel-program):focus,
+        .channel:has(.channel-program:focus) {
+            outline: #00B2FF auto 1px;
+        }
+
+        #channels-column {
+            z-index: 9 !important;
+        }
+
+        * {
+            transition: none !important;
+        }
+    </style>
+    <style id="new-player-fix" media="screen and (max-width: 100vh)">
+        /* bruh */
+        .vjs-theme-plyr .vjs-play-progress .vjs-time-tooltip {
+            display: flex !important;
+        }
+
+        .vjs-theme-plyr .vjs-play-control {
+            margin-left: 0 !important;
+        }
+    </style>
+    <style id="search"></style>
+    <style data-translation-id="playerLanguageCSS"></style>
+    <title>Zappr</title>
+  <script type="module" crossorigin src="/assets/main-BAqMeLY_.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-Bh1tDfsg.js">
+  <link rel="stylesheet" crossorigin href="/assets/main-zbRHVRHF.css">
+</head>
+
+<body>
+    <div id="loading">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="2.25 2.25 19.5 19.5">
+            <path fill="currentColor"
+                d="M12 2.25c-5.384 0-9.75 4.366-9.75 9.75s4.366 9.75 9.75 9.75v-2.437A7.312 7.312 0 1 1 19.313 12h2.437c0-5.384-4.366-9.75-9.75-9.75">
+            </path>
+        </svg>
+        <span>Zappr</span>
+    </div>
+    <div class="columns">
+        <div class="column is-one-third-widescreen is-one-quarter-fullhd is-two-fifths-desktop is-two-fifths-tablet p-0"
+            id="channels-column">
+            <div id="channels" class="menu" tabindex="-1">
+                <!--<div id="urgent-alerts" class="header"></div>-->
+                <div class="source-header first-source header">
+                    <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='6%202%2011.77%2020'%3e%3cpath%20fill='%23fff'%20d='M17.77%203.77L16%202L6%2012l10%2010l1.77-1.77L9.54%2012z'/%3e%3c/svg%3e" data-translation-id="previousSource"
+                        data-translation-target="alt" class="previous">
+                    <span class="current-source" data-translation-id="mainSource"></span>
+                    <img src="data:image/svg+xml,%3csvg%20width='12'%20height='20'%20viewBox='0%200%2012%2020'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M-0.000469208%201.77L1.76953%200L11.7695%2010L1.76953%2020L-0.000469208%2018.23L8.22953%2010L-0.000469208%201.77Z'%20fill='white'/%3e%3c/svg%3e" data-translation-id="nextSource" data-translation-target="alt"
+                        class="next">
+                </div>
+            </div>
+            <div id="search-results"></div>
+            <div id="epg">
+                <h1 id="epg-header">
+                    <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='4%204%2016%2016'%3e%3cpath%20fill='%23fff'%20d='M20%2011H7.83l5.59-5.59L12%204l-8%208l8%208l1.41-1.41L7.83%2013H20z'/%3e%3c/svg%3e" id="epg-exit" data-translation-id="epgExit"
+                        data-translation-target="alt">
+                    <div data-translation-id="epgHeaderText"></div>
+                    <span id="epg-date" class="first-day">
+                        <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='6%202%2011.77%2020'%3e%3cpath%20fill='%23fff'%20d='M17.77%203.77L16%202L6%2012l10%2010l1.77-1.77L9.54%2012z'/%3e%3c/svg%3e" id="epg-previous-day" data-translation-id="epgPreviousDay"
+                            data-translation-target="alt">
+                        <span></span>
+                        <img src="data:image/svg+xml,%3csvg%20width='12'%20height='20'%20viewBox='0%200%2012%2020'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M-0.000469208%201.77L1.76953%200L11.7695%2010L1.76953%2020L-0.000469208%2018.23L8.22953%2010L-0.000469208%201.77Z'%20fill='white'/%3e%3c/svg%3e" id="epg-next-day" data-translation-id="epgNextDay"
+                            data-translation-target="alt">
+                    </span>
+                    <img src="data:image/svg+xml,%3csvg%20width='32'%20height='16'%20viewBox='0%200%2032%2016'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M16%207H3.83L9.42%201.41L8%200L0%208L8%2016L9.41%2014.59L3.83%209H16V7Z'%20fill='white'/%3e%3cpath%20d='M16%207H28.17L22.58%201.41L24%200L32%208L24%2016L22.59%2014.59L28.17%209H16V7Z'%20fill='white'/%3e%3c/svg%3e" id="epg-resize" data-translation-id="epgResize"
+                        data-translation-target="alt">
+                </h1>
+                <div class="epg-items"></div>
+            </div>
+            <div id="search-input">
+                <input type="text" data-translation-id="searchChannel" data-translation-target="placeholder">
+            </div>
+            <div class="toast-notification-container">
+                <div class="toast-notification">
+                    <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='2%202%2020%2020'%3e%3cpath%20fill='%23fff'%20d='M11%2017h2v-6h-2zm1-8q.425%200%20.713-.288T13%208t-.288-.712T12%207t-.712.288T11%208t.288.713T12%209m0%2013q-2.075%200-3.9-.788t-3.175-2.137T2.788%2015.9T2%2012t.788-3.9t2.137-3.175T8.1%202.788T12%202t3.9.788t3.175%202.137T21.213%208.1T22%2012t-.788%203.9t-2.137%203.175t-3.175%202.138T12%2022m0-2q3.35%200%205.675-2.325T20%2012t-2.325-5.675T12%204T6.325%206.325T4%2012t2.325%205.675T12%2020m0-8'%3e%3c/path%3e%3c/svg%3e">
+                    <span data-translation-id="epgLoading"></span>
+                    <a class="save-favorites" data-translation-id="save"></a>
+                </div>
+            </div>
+            <div class="tooltip-content" id="my-list">
+                <div class="tooltip-content-box" id="list-picker">
+                    <div class="tabs">
+                        <div id="base-list-tab">
+                            <h3 data-translation-id="selectBaseList"></h3>
+                            <div class="list" data-id="default">
+                                <img src="/assets/icons/favicon.svg" class="list-icon">
+                                <div class="list-info">
+                                    <span class="list-name" data-translation-id="officialZapprList"></span>
+                                    <span>Publisher: <a href="https://github.com/ZapprTV" target="_blank">Zappr</a> <a
+                                            class="list-publisher-donate" href="https://ko-fi.com/FrancescoRosi"
+                                            target="_blank" data-translation-id="listPublisherDonate"></a></span>
+                                </div>
+                            </div>
+                            <div class="list" data-id="favorites">
+                                <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='1%202.1%2034%2032.53'%3e%3cpath%20fill='%23FFAC33'%20d='M27.287%2034.627c-.404%200-.806-.124-1.152-.371L18%2028.422l-8.135%205.834c-.693.496-1.623.496-2.312-.008-.689-.499-.979-1.385-.721-2.194l3.034-9.792-8.062-5.681c-.685-.505-.97-1.393-.708-2.203.264-.808%201.016-1.357%201.866-1.363L12.947%2013l3.179-9.549c.268-.809%201.023-1.353%201.874-1.353.851%200%201.606.545%201.875%201.353L23%2013l10.036.015c.853.006%201.606.556%201.867%201.363.263.81-.022%201.698-.708%202.203l-8.062%205.681%203.034%209.792c.26.809-.033%201.695-.72%202.194-.347.254-.753.379-1.16.379z'%3e%3c/path%3e%3c/svg%3e" class="list-icon">
+                                <div class="list-info">
+                                    <span class="list-name" data-translation-id="favoritesBaseList"></span>
+                                    <span class="list-subtitle"
+                                        data-translation-id="selectFavoritesFromOfficialBaseList"></span>
+                                </div>
+                                <div class="list-icons">
+                                    <img class="edit-list" src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='3%203%2018%2018'%3e%3cpath%20fill='white'%20d='M5%2019h1.425L16.2%209.225L14.775%207.8L5%2017.575zm-2%202v-4.25L16.2%203.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425%205q.3.275.438.65T21%206.4q0%20.4-.137.763t-.438.662L7.25%2021zM19%206.4L17.6%205zm-3.525%202.125l-.7-.725L16.2%209.225z'%3e%3c/path%3e%3c/svg%3e" data-translation-id="editList"
+                                        data-translation-target="alt">
+                                </div>
+                            </div>
+                            <div class="list add-list">
+                                <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='5%205%2014%2014'%3e%3cpath%20fill='white'%20d='M19%2012.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z'%3e%3c/path%3e%3c/svg%3e" class="list-icon">
+                                <div class="list-info">
+                                    <span class="list-name" data-translation-id="addList"></span>
+                                </div>
+                                <div class="add-list-options">
+                                    <a class="add-list-option create-manually"
+                                        data-translation-id="createListManually"></a>
+                                    <input class="add-list-option" data-translation-id="insertListURL"
+                                        data-translation-target="placeholder" type="url">
+                                    <a class="load-custom-url">
+                                        <img src="data:image/svg+xml,%3csvg%20width='8'%20height='8'%20viewBox='0%200%208%208'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M0%203.5H6.085L3.29%200.705L4%200L8%204L4%208L3.295%207.295L6.085%204.5H0V3.5Z'%20fill='white'/%3e%3c/svg%3e">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="additional-list-tab">
+                            <h3 data-translation-id="selectAdditionalLists"></h3>
+                            <div class="list add-list">
+                                <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='5%205%2014%2014'%3e%3cpath%20fill='white'%20d='M19%2012.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z'%3e%3c/path%3e%3c/svg%3e" class="list-icon">
+                                <div class="list-info">
+                                    <span class="list-name" data-translation-id="addList"></span>
+                                </div>
+                                <div class="add-list-options">
+                                    <a class="add-list-option create-manually"
+                                        data-translation-id="createListManually"></a>
+                                    <input class="add-list-option" data-translation-id="insertListURL"
+                                        data-translation-target="placeholder" type="url">
+                                    <a class="load-custom-url">
+                                        <img src="data:image/svg+xml,%3csvg%20width='8'%20height='8'%20viewBox='0%200%208%208'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M0%203.5H6.085L3.29%200.705L4%200L8%204L4%208L3.295%207.295L6.085%204.5H0V3.5Z'%20fill='white'/%3e%3c/svg%3e">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-links">
+                        <a data-translation-id="baseList"></a>
+                        <a data-translation-id="additionalLists"></a>
+                    </div>
+                    <div id="my-list-explanation-container">
+                        <a id="my-list-explanation-link">
+                            <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='1em'%20height='1em'%20viewBox='0%200%2024%2024'%3e%3cpath%20fill='white'%20d='M12.838%2017.638q.362-.363.362-.888t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362t.888-.363M11.05%2014.15h1.85q0-.825.188-1.3t1.062-1.3q.65-.65%201.025-1.238T15.55%208.9q0-1.4-1.025-2.15T12.1%206q-1.425%200-2.312.75T8.55%208.55l1.65.65q.125-.45.563-.975T12.1%207.7q.8%200%201.2.438t.4.962q0%20.5-.3.938t-.75.812q-1.1.975-1.35%201.475t-.25%201.825M12%2022q-2.075%200-3.9-.787t-3.175-2.138T2.788%2015.9T2%2012t.788-3.9t2.137-3.175T8.1%202.788T12%202t3.9.788t3.175%202.137T21.213%208.1T22%2012t-.788%203.9t-2.137%203.175t-3.175%202.138T12%2022m0-2q3.35%200%205.675-2.325T20%2012t-2.325-5.675T12%204T6.325%206.325T4%2012t2.325%205.675T12%2020m0-8'%20/%3e%3c/svg%3e">
+                            <span data-translation-id="howDoesMyListWork"></span>
+                        </a>
+                        <div id="my-list-explanation" data-translation-id="myListExplanation"></div>
+                    </div>
+                    <a class="save-tab">
+                        <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='3%201%2018%2021'%3e%3cpath%20fill='%23fff'%20d='M12%2022q-1.875%200-3.512-.712t-2.85-1.925t-1.925-2.85T3%2013h2q0%202.925%202.038%204.963T12%2020t4.963-2.037T19%2013t-2.037-4.962T12%206h-.15l1.55%201.55L12%209L8%205l4-4l1.4%201.45L11.85%204H12q1.875%200%203.513.713t2.85%201.925t1.925%202.85T21%2013t-.712%203.513t-1.925%202.85t-2.85%201.925T12%2022'%3e%3c/path%3e%3c/svg%3e">
+                        <span data-translation-id="saveAndReload"></span>
+                    </a>
+                </div>
+                <div class="tooltip-content-box" id="list-editor">
+                    <div class="tabs">
+                        <div id="list-info-tab"></div>
+                        <div id="list-channels-tab">
+                            <div id="list-channels"></div>
+                            <div class="list" id="edit-channel">
+                                <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='5%205%2014%2014'%3e%3cpath%20fill='white'%20d='M19%2012.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z'%3e%3c/path%3e%3c/svg%3e" class="list-icon">
+                                <div class="list-info">
+                                    <span class="list-name" data-translation-id="addChannel"></span>
+                                </div>
+                                <div id="edit-channel-options"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-links">
+                        <a data-translation-id="listEditorInfo"></a>
+                        <a data-translation-id="listEditorChannels"></a>
+                    </div>
+                    <a class="save-tab">
+                        <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='3%203%2018%2018'%3e%3cpath%20fill='%23fff'%20d='M21%207v12q0%20.825-.587%201.413T19%2021H5q-.825%200-1.412-.587T3%2019V5q0-.825.588-1.412T5%203h12zm-6.875%2010.125Q15%2016.25%2015%2015t-.875-2.125T12%2012t-2.125.875T9%2015t.875%202.125T12%2018t2.125-.875M6%2010h9V6H6z'%3e%3c/path%3e%3c/svg%3e">
+                        <span data-translation-id="saveList"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="tooltip-content" id="settings">
+                <div class="tooltip-content-box">
+                    <div id="region-selector">
+                        <span data-translation-id="language"></span>
+                        <select id="language"></select>
+                        <span data-translation-id="country"></span>
+                        <select id="country"></select>
+                        <span data-translation-id="region"></span>
+                        <select id="region"></select>
+                        <div class="disabled-layer" data-translation-id="disabledRegionSettings"
+                            data-translation-target="title"></div>
+                    </div>
+                    <a id="save-and-reload" class="tooltip-button" data-translation-id="saveAndReload" hidden></a>
+                </div>
+            </div>
+            <div class="tooltip-content" id="info-tooltip">
+                <div class="tooltip-content-box" data-translation-id="infoTooltip"></div>
+            </div>
+            <div class="tooltip-content news-not-loaded" id="news">
+                <div class="tooltip-content-box">
+                    <div id="news-info">
+                        <span data-translation-id="newsInstructions"></span>
+                        <span data-translation-id="newsHosting"></span>
+                    </div>
+                    <div id="news-list"></div>
+                    <a rel="me" href="https://mastodon.uno/@zappr" hidden id="mastodon-verification"></a>
+                </div>
+            </div>
+            <div id="bottom">
+                <div id="info">
+                    <b>Zappr</b>
+                </div>
+                <div id="icons">
+                    <a href="#" id="install" hidden>
+                        <span data-translation-id="installPWA">Installa</span>
+                        <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20fill='%23fff'%20d='M8%2021v-2H4q-.825%200-1.412-.587T2%2017V5q0-.825.588-1.412T4%203h8v2H4v12h16v-3h2v3q0%20.825-.587%201.413T20%2019h-4v2zm9-7l-5-5l1.4-1.4l2.6%202.575V3h2v7.175L20.6%207.6L22%209z'/%3e%3c/svg%3e">
+                    </a>
+                    <a id="my-list-icon" class="tooltip icon" data-target="#my-list" aria-label="My List">
+                        <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='3%207%2018%2010'%3e%3cpath%20fill='white'%20d='M7%209V7h14v2zm0%204v-2h14v2zm0%204v-2h14v2zM4%209q-.425%200-.712-.288T3%208t.288-.712T4%207t.713.288T5%208t-.288.713T4%209m0%204q-.425%200-.712-.288T3%2012t.288-.712T4%2011t.713.288T5%2012t-.288.713T4%2013m0%204q-.425%200-.712-.288T3%2016t.288-.712T4%2015t.713.288T5%2016t-.288.713T4%2017'%3e%3c/path%3e%3c/svg%3e">
+                        <div class="promo-tooltip">
+                            <div class="header">
+                                <b data-translation-id="myListTemporaryPromoTooltipTitle"></b>
+                                <div class="close"></div>
+                            </div>
+                            <div class="content" data-translation-id="myListTemporaryPromoTooltipText"></div>
+                        </div>
+                    </a>
+                    <a id="search-icon" class="icon" data-translation-id="search" data-translation-target="aria-label">
+                        <img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'%20standalone='no'?%3e%3csvg%20version='1.1'%20viewBox='-10%200%20373%20373'%20id='svg1'%20width='373'%20height='373'%20xmlns='http://www.w3.org/2000/svg'%20xmlns:svg='http://www.w3.org/2000/svg'%3e%3cdefs%20id='defs1'%20/%3e%3cpath%20d='m%20129,235%20q%2040,0%2068,-28%2028,-28%2028,-68%200,-40%20-28,-68%20-28,-28%20-68,-28%20-40,0%20-68,28%20-28,28%20-28,68%200,40%2028,68%2028,28%2068,28%20z%20m%20128,0%20106,106%20-32,32%20-106,-106%20v%20-17%20l%20-6,-6%20Q%20181,277%20129,277%2071,277%2030.5,237%20-10,197%20-10,139%20-10,81%2030.5,40.5%2071,0%20129,0%20q%2058,0%2098,40.5%2040,40.5%2040,98.5%200,21%20-10,47.5%20-10,26.5%20-23,42.5%20l%206,6%20z'%20id='path1'%20fill='%23ffffff'%20/%3e%3c/svg%3e">
+                    </a>
+                    <a class="tooltip icon" data-target="#news" data-translation-id="news"
+                        data-translation-target="aria-label">
+                        <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%20256%202048%201408'%3e%3cpath%20fill='%23fff'%20d='M2048%20512v896q0%2053-20%2099t-55%2081t-82%2055t-99%2021H249q-51%200-96-20t-79-53t-54-79t-20-97V256h1792v256zm-128%20128h-128v704q0%2026-19%2045t-45%2019t-45-19t-19-45V384H128v1031q0%2025%209%2047t26%2038t39%2026t47%2010h1543q27%200%2050-10t40-27t28-41t10-50zm-384%200H256V512h1280zm0%20768h-512v-128h512zm0-256h-512v-128h512zm0-256h-512V768h512zm-640%20512H256V765h640zm-512-128h384V893H384z'%3e%3c/path%3e%3c/svg%3e">
+                    </a>
+                    <a class="tooltip icon" data-target="#info-tooltip" data-translation-id="info"
+                        data-translation-target="aria-label">
+                        <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='2%202%2020%2020'%3e%3cpath%20fill='%23fff'%20d='M11%2017h2v-6h-2zm1-8q.425%200%20.713-.288T13%208t-.288-.712T12%207t-.712.288T11%208t.288.713T12%209m0%2013q-2.075%200-3.9-.788t-3.175-2.137T2.788%2015.9T2%2012t.788-3.9t2.137-3.175T8.1%202.788T12%202t3.9.788t3.175%202.137T21.213%208.1T22%2012t-.788%203.9t-2.137%203.175t-3.175%202.138T12%2022m0-2q3.35%200%205.675-2.325T20%2012t-2.325-5.675T12%204T6.325%206.325T4%2012t2.325%205.675T12%2020m0-8'%3e%3c/path%3e%3c/svg%3e">
+                    </a>
+                    <span id="tv-settings"><img src="data:image/svg+xml,%3csvg%20width='393'%20height='379'%20viewBox='0%200%20393%20379'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M30.3333%20122.667L15.2507%20137.749L0.167992%20122.667L15.2507%20107.584L30.3333%20122.667ZM137%20378.667C131.342%20378.667%20125.916%20376.419%20121.915%20372.418C117.914%20368.418%20115.667%20362.991%20115.667%20357.333C115.667%20351.675%20117.914%20346.249%20121.915%20342.248C125.916%20338.248%20131.342%20336%20137%20336V378.667ZM121.917%20244.416L15.2507%20137.749L45.416%20107.584L152.083%20214.251L121.917%20244.416ZM15.2507%20107.584L121.917%200.917328L152.083%2031.0827L45.416%20137.749L15.2507%20107.584ZM30.3333%20101.333H254.333V144H30.3333V101.333ZM254.333%20378.667H137V336H254.333V378.667ZM393%20240C393%20276.777%20378.391%20312.047%20352.385%20338.052C326.38%20364.057%20291.11%20378.667%20254.333%20378.667V336C266.94%20336%20279.424%20333.517%20291.071%20328.692C302.718%20323.868%20313.301%20316.797%20322.216%20307.882C331.13%20298.968%20338.201%20288.385%20343.026%20276.738C347.85%20265.09%20350.333%20252.607%20350.333%20240H393ZM254.333%20101.333C291.11%20101.333%20326.38%20115.943%20352.385%20141.948C378.391%20167.953%20393%20203.223%20393%20240H350.333C350.333%20227.393%20347.85%20214.91%20343.026%20203.262C338.201%20191.615%20331.13%20181.032%20322.216%20172.118C313.301%20163.203%20302.718%20156.132%20291.071%20151.308C279.424%20146.483%20266.94%20144%20254.333%20144V101.333Z'%20fill='white'/%3e%3c/svg%3e"> <b>BACK</b> <span
+                            data-translation-id="tvChangeRegion">per cambiare regione</span></span>
+                    <a id="settings-icon" class="tooltip icon" data-target="#settings" data-translation-id="settings"
+                        data-translation-target="aria-label">
+                        <img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='32'%20height='32'%20viewBox='0%200%20512%20512'%3e%3cpath%20fill='%23fff'%20d='M245.151%20168a88%2088%200%201%200%2088%2088a88.1%2088.1%200%200%200-88-88m0%20144a56%2056%200%201%201%2056-56a56.063%2056.063%200%200%201-56%2056'/%3e%3cpath%20fill='%23fff'%20d='m464.7%20322.319l-31.77-26.153a193.081%20193.081%200%200%200%200-80.332l31.77-26.153a19.941%2019.941%200%200%200%204.606-25.439l-32.612-56.483a19.936%2019.936%200%200%200-24.337-8.73l-38.561%2014.447a192.038%20192.038%200%200%200-69.54-40.192l-6.766-40.571A19.936%2019.936%200%200%200%20277.762%2016H212.54a19.937%2019.937%200%200%200-19.728%2016.712l-6.762%2040.572a192.03%20192.03%200%200%200-69.54%2040.192L77.945%2099.027a19.937%2019.937%200%200%200-24.334%208.731L21%20164.245a19.94%2019.94%200%200%200%204.61%2025.438l31.767%2026.151a193.081%20193.081%200%200%200%200%2080.332l-31.77%2026.153A19.942%2019.942%200%200%200%2021%20347.758l32.612%2056.483a19.937%2019.937%200%200%200%2024.337%208.73l38.562-14.447a192.03%20192.03%200%200%200%2069.54%2040.192l6.762%2040.571A19.937%2019.937%200%200%200%20212.54%20496h65.222a19.936%2019.936%200%200%200%2019.728-16.712l6.763-40.572a192.038%20192.038%200%200%200%2069.54-40.192l38.564%2014.449a19.938%2019.938%200%200%200%2024.334-8.731l32.609-56.487a19.939%2019.939%200%200%200-4.6-25.436m-50.636%2057.12l-48.109-18.024l-7.285%207.334a159.955%20159.955%200%200%201-72.625%2041.973l-10%202.636L267.6%20464h-44.89l-8.442-50.642l-10-2.636a159.955%20159.955%200%200%201-72.625-41.973l-7.285-7.334l-48.117%2018.024L53.8%20340.562l39.629-32.624l-2.7-9.973a160.9%20160.9%200%200%201%200-83.93l2.7-9.972L53.8%20171.439l22.446-38.878l48.109%2018.024l7.285-7.334a159.955%20159.955%200%200%201%2072.625-41.973l10-2.636L222.706%2048H267.6l8.442%2050.642l10%202.636a159.955%20159.955%200%200%201%2072.625%2041.973l7.285%207.334l48.109-18.024l22.447%2038.877l-39.629%2032.625l2.7%209.972a160.9%20160.9%200%200%201%200%2083.93l-2.7%209.973l39.629%2032.623Z'/%3e%3c/svg%3e">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <video id="tv" class="video-js vjs-theme-plyr column p-0" controls></video>
+        <canvas width="512" height="512"></canvas>
+    </div>
+    <div id="overlays">
+        <div id="lcn-typing">
+            <div id="lcn-typed"></div>
+            <div id="controls" data-translation-id="lcnTyping"></div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const NativeXHR = window.XMLHttpRequest;
+
+            window.XMLHttpRequest = new Proxy(NativeXHR, {
+                construct(target, args) {
+                    const xhr = new target(...args);
+
+                    return new Proxy(xhr, {
+                        get(obj, prop) {
+                            if (prop === "status") return obj.status === 405 ? 200 : obj.status;
+                            if (prop === "open") {
+                                return function (method, url, ...rest) {
+                                    if (/^https:\/\/rai[a-z]+[0-9]{1}-live\.akamaized\.net/g.test(url) && !/^https:\/\/raievent[0-9]{1,2}-live\.akamaized\.net/g.test(url) && !/^https:\/\/radio[a-z]+-live\.akamaized\.net/g.test(url) && new URL(url).searchParams.get("aka_me_session_id") === null) {
+                                        if (zappr.raiAkamai.expiration - (Date.now() / 1000) <= 15) {
+                                            fetch(`${window["zappr"].config.backend.host["alwaysdata"]}/rai-akamai`, { method: "POST" })
+                                                .then(response => response.json())
+                                                .then(authData => {
+                                                    window.zappr.raiAkamai = {
+                                                        ...authData,
+                                                        expiration: parseInt(new URLSearchParams(authData.auth).get("hdnea").split("~").filter(el => el.startsWith("exp"))[0].split("=")[1])
+                                                    };
+                                                });
+                                        };
+                                        let urlSearch = new URL(url).searchParams;
+                                        urlSearch.set("hdnea", new URLSearchParams(zappr.raiAkamai.auth).get("hdnea"));
+                                        url = `${url.replace(new URL(url).search, "")}?${urlSearch}`;
+                                        if (/media_.*([0-9]+)\.ts/.test(new URL(url).pathname.split("/").filter(el => el).slice(-1)[0])) url += `&aka_me_session_id=${encodeURI(zappr.raiAkamai.sessionID)}&aka_msn=${parseInt(new URL(url).pathname.split("/").filter(el => el).slice(-1)[0].replaceAll(/\D+/g, ""))}&aka_hls_version=3&aka_media_format_type=hls`;
+                                    };
+                                    if (/^https:\/\/rai[a-z]+[0-9]{1}-live\.akamaized\.net/g.test(url)) url += `&_=${Date.now()}`;
+                                    return obj.open(method, url, ...rest);
+                                };
+                            };
+
+                            const val = obj[prop];
+                            return typeof val === "function" ? val.bind(obj) : val;
+                        },
+                        set(obj, prop, value) {
+                            obj[prop] = value;
+                            return true;
+                        }
+                    });
+                }
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            const NativeXHR = window.XMLHttpRequest;
+
+            window.XMLHttpRequest = new Proxy(NativeXHR, {
+                construct(target, args) {
+                    const xhr = new target(...args);
+
+                    return new Proxy(xhr, {
+                        get(obj, prop) {
+                            if (prop === "open") {
+                                return function (method, url, ...rest) {
+                                    if (url.startsWith("https://prod-kami.wuaki.tv/v1/licensing/aes128/")) url = `https://api.zappr.stream/rakuten-licensing/${new URL(url).searchParams.get("uuid")}`;
+                                    return obj.open(method, url, ...rest);
+                                };
+                            };
+
+                            const val = obj[prop];
+                            return typeof val === "function" ? val.bind(obj) : val;
+                        },
+                        set(obj, prop, value) {
+                            obj[prop] = value;
+                            return true;
+                        }
+                    });
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

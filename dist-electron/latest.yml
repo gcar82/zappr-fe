@@ -1,0 +1,8 @@
+version: 0.0.1
+files:
+  - url: Zappr-Setup-0.0.1.exe
+    sha512: 4fGW0deKSKYiebEvRirU0WF3Vu+BqM/Y8vS96/b1oHRYcwMzSWSv/JLHYjHB5v5sSomK+tjRfY12k30+yTcqBQ==
+    size: 291075000
+path: Zappr-Setup-0.0.1.exe
+sha512: 4fGW0deKSKYiebEvRirU0WF3Vu+BqM/Y8vS96/b1oHRYcwMzSWSv/JLHYjHB5v5sSomK+tjRfY12k30+yTcqBQ==
+releaseDate: '2026-07-06T15:13:22.916Z'

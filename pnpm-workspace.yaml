@@ -1,0 +1,10 @@
+allowBuilds:
+  electron: true
+  electron-builder: true
+  esbuild: true
+  "@swc/core": true
+onlyBuiltDependencies:
+  - electron
+  - electron-builder
+  - esbuild
+  - "@swc/core"
